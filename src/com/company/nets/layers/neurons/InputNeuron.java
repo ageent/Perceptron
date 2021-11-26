@@ -1,8 +1,16 @@
 package com.company.nets.layers.neurons;
 
 public class InputNeuron extends AbstractNeuron {
-    public InputNeuron(int inputCount) {
-        this.setWeights(getInitialWeights(inputCount));
+    private InputNeuron(int inputCount,
+                        CombinationFunc combination,
+                        ActivationFunc activation,
+                        boolean shift) {
+        super(inputCount, combination, activation, shift);
+    }
+
+    public InputNeuron() {
+        this(0, CombinationFunc::sum, ActivationFunc::identicalFunc, false);
+        this.setWeights(getInitialWeights(0, false));
     }
 
     /**

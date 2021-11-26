@@ -1,6 +1,6 @@
 package com.company.nets.layers.neurons;
 
-public class Tlu extends AbstractNeuron {
+/*public class Tlu extends AbstractNeuron {
     public Tlu(int inputCount) {
         this.setWeights(getInitialWeights(inputCount));
     }
@@ -10,4 +10,4 @@ public class Tlu extends AbstractNeuron {
         double comb = CombinationFunc.linComb(inputs, getWeights());
         return ActivationFunc.stepFunc(comb);
     }
-}
+}*/

@@ -13,4 +13,8 @@ public interface ActivationFunc {
     static double sigmoid(double signalsCombination) {
         return 1 / (1 + Math.exp(-signalsCombination));
     }
+
+    static double identicalFunc(double combinationResult) {
+        return combinationResult;
+    }
 }

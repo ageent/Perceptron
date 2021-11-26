@@ -1,4 +1,12 @@
 package com.company.nets.layers;
 
-public class InputLayer extends Layer {
+import com.company.nets.layers.neurons.InputNeuron;
+
+public class InputLayer extends AbstractLayer {
+    public InputLayer(int layerSize) {
+        super(layerSize);
+        for (int i = 0; i < layerSize; i++) {
+            this.add(new InputNeuron());
+        }
+    }
 }
