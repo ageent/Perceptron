@@ -71,12 +71,12 @@ public abstract class AbstractNeuron {
     }
 
     @Override
-    @SuppressWarnings("all")
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof AbstractNeuron)) return false;
-        AbstractNeuron that = (AbstractNeuron) o;
-        return Arrays.equals(weights, that.weights) && Objects.equals(combination, that.combination) && Objects.equals(activation, that.activation);
+        if (!(o instanceof AbstractNeuron that)) return false;
+        return Arrays.equals(weights, that.weights) &&
+                Objects.equals(combination, that.combination) &&
+                Objects.equals(activation, that.activation);
     }
 
     @Override
