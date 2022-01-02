@@ -9,6 +9,11 @@ public abstract class Optimizer {
     }
 
     /**
+     * Change weights of model.
+     */
+    public abstract void apply(double[] input);
+
+    /**
      * Read params and fill fields of object.
      */
     public abstract void fill(AbstractAnn ann, CostFunc cost, HashMap<String, Object> params);

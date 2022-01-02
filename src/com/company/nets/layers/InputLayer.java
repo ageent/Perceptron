@@ -14,4 +14,9 @@ public class InputLayer extends AbstractLayer {
     public double[] affect(double... inputs) {
         return inputs;
     }
+
+    @Override
+    public double[] parallelAffect(double... inputs) {
+        return inputs;
+    }
 }
