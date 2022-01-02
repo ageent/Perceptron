@@ -29,4 +29,12 @@ public class MLP extends AbstractAnn {
         }
         return res;
     }
+
+    public double[] parallelPredict(double[] inputs) {
+        double[] res = inputs;
+        for (AbstractLayer l : this) {
+            res = l.parallelAffect(res);
+        }
+        return res;
+    }
 }
