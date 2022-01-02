@@ -34,4 +34,8 @@ public abstract class AbstractLayer extends ArrayList<AbstractNeuron> {
     public AbstractLayer(Collection<? extends AbstractNeuron> c) {
         super(c);
     }
+
+    public abstract double[] affect(double... inputs);
+
+    public abstract double[] parallelAffect(double... inputs);
 }

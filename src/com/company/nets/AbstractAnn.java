@@ -3,9 +3,11 @@ package com.company.nets;
 import com.company.nets.layers.AbstractLayer;
 import com.company.nets.layers.InputLayer;
 import com.company.nets.layers.neurons.AbstractNeuron;
+import com.company.nets.opt.Optimizer;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 
 /**
@@ -39,16 +41,17 @@ public abstract class AbstractAnn extends ArrayList<AbstractLayer> {
         super(c);
     }
 
-    public abstract void fit(Training algorithm);
+    /**
+     * Fill map of params and call optimizer.
+     */
+    public abstract void fit(Optimizer algorithm, HashMap<String, Double> params);
 
-    public abstract void fit();
-
-    public abstract void predict();
+    public abstract double[] predict(double[] inputs);
 
     /**
      * @return array of size L x N x W, where L is layers count,
      * N is neuron count, W is weights count. Uneven array.
-     * */
+     */
     public double[][][] getWeights() {
         double[][][] weights = new double[this.size() - 1][][];
         Iterator<AbstractLayer> iter = this.iterator();

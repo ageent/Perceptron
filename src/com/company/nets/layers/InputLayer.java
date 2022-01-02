@@ -9,4 +9,9 @@ public class InputLayer extends AbstractLayer {
             this.add(new InputNeuron());
         }
     }
+
+    @Override
+    public double[] affect(double... inputs) {
+        return inputs;
+    }
 }
