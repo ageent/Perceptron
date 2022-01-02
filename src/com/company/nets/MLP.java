@@ -14,10 +14,6 @@ public class MLP extends AbstractAnn {
 
     }
 
-    public void fit(HashMap<String, Double> params) {
-
-    }
-
     /**
      * It is assumed that the size of the layers decreases or remains the same.
      */

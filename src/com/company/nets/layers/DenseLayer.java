@@ -43,7 +43,6 @@ public class DenseLayer extends AbstractLayer {
         BlockingQueue<AbstractNeuron> queue = new LinkedBlockingQueue<>(layerSize);
         ExecutorService executorService = Executors.newFixedThreadPool(layerSize);
 
-
         for (AbstractNeuron n : this) {
             while (!queue.offer(n)) ;
             try {
@@ -54,6 +53,7 @@ public class DenseLayer extends AbstractLayer {
             } catch (NullPointerException ignored) {
             }
         }
+        executorService.shutdown();
 
         return out;
     }
