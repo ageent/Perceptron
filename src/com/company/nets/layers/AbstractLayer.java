@@ -35,7 +35,7 @@ public abstract class AbstractLayer extends ArrayList<AbstractNeuron> {
         super(c);
     }
 
-    public abstract double[] affect(double... inputs);
+    public abstract double[] affect(double[] inputs);
 
-    public abstract double[] parallelAffect(double... inputs);
+    public abstract double[] parallelAffect(double[] inputs);
 }

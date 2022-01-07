@@ -1,13 +1,33 @@
 package com.company.nets;
 
 import com.company.nets.layers.AbstractLayer;
-import com.company.nets.opt.CostFunc;
 import com.company.nets.opt.Optimizer;
 import com.company.nets.opt.SGD;
+import com.company.nets.opt.cost.MSE;
 
+import java.util.Collection;
 import java.util.HashMap;
 
 public class MLP extends AbstractAnn {
+    /**
+     * Constructs an empty list with an initial capacity of ten.
+     * Create input layer
+     */
+    public MLP() {
+    }
+
+    /**
+     * Constructs a list containing the elements of the specified
+     * collection, in the order they are returned by the collection's
+     * iterator.
+     *
+     * @param c the collection whose elements are to be placed into this list
+     * @throws NullPointerException if the specified collection is null
+     */
+    public MLP(Collection<? extends AbstractLayer> c) {
+        super(c);
+    }
+
     /**
      * Fill map of params and call optimizer.
      *
@@ -50,9 +70,15 @@ public class MLP extends AbstractAnn {
         return res;
     }
 
+    /**
+     * Cost function is same as for fit().
+     *
+     * @return the result of calculating the cost function for each output neuron (columns of the matrix yTrain).
+     */
     @Override
     public double evaluate(double[][] xTest, double[][] yTest) {
-        return 0;
+        double[][] pred = predict(xTest);
+        return getCost().apply(pred, yTest);
     }
 
     @Override
@@ -62,6 +88,9 @@ public class MLP extends AbstractAnn {
         Optimizer alg = new SGD();
         alg.fill(this, optParams);
         setAlgorithm(alg);
-        setCost(CostFunc::MSE);
+        setCost(new MSE());
     }
+
+
+
 }

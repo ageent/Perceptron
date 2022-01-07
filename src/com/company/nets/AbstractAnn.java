@@ -2,8 +2,8 @@ package com.company.nets;
 
 import com.company.nets.layers.AbstractLayer;
 import com.company.nets.layers.neurons.AbstractNeuron;
-import com.company.nets.opt.CostFunc;
 import com.company.nets.opt.Optimizer;
+import com.company.nets.opt.cost.AbstractCostFunc;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -14,7 +14,7 @@ import java.util.LinkedList;
  */
 public abstract class AbstractAnn extends LinkedList<AbstractLayer> {
     private Optimizer algorithm;
-    private CostFunc cost;
+    private AbstractCostFunc cost;
 
     /**
      * Constructs an empty list with an initial capacity of ten.
@@ -37,7 +37,7 @@ public abstract class AbstractAnn extends LinkedList<AbstractLayer> {
         setDefaultValues();
     }
 
-    public void fillObj(Optimizer algorithm, CostFunc cost) {
+    public void fillObj(Optimizer algorithm, AbstractCostFunc cost) {
         this.algorithm = algorithm;
         this.cost = cost;
     }
@@ -112,11 +112,11 @@ public abstract class AbstractAnn extends LinkedList<AbstractLayer> {
         this.algorithm = algorithm;
     }
 
-    public CostFunc getCost() {
+    public AbstractCostFunc getCost() {
         return cost;
     }
 
-    public void setCost(CostFunc cost) {
+    public void setCost(AbstractCostFunc cost) {
         this.cost = cost;
     }
 }
