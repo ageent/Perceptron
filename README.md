@@ -9,3 +9,5 @@ The architecture was developed taking into account further expansion - the addit
 - Weights refer to the inputs of neurons (dendrites), not to their outputs (synapses) for ease of implementation.
 - Currently, only stochastic gradient descent (SGD) is implemented by the backpropagation method.
   - All results direct passage are kept in memory.
+- Input layer object and Sift neuron object doesn't exist. The implementation provides for correct execution without
+  separate creation of these objects.

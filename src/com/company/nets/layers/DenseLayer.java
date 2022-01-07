@@ -11,6 +11,9 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class DenseLayer extends AbstractLayer {
+    /**
+     * @param sizeOfPreviousLayer is input amount if it is first hide layer.
+     */
     public DenseLayer(int layerSize, int sizeOfPreviousLayer,
                       CombinationFunc comb,
                       ActivationFunc act,
@@ -22,7 +25,7 @@ public class DenseLayer extends AbstractLayer {
     }
 
     @Override
-    public double[] affect(double... inputs) {
+    public double[] affect(double[] inputs) {
         double[] out = new double[this.size()];
         int i = 0;
         for (AbstractNeuron n : this) {
@@ -37,7 +40,7 @@ public class DenseLayer extends AbstractLayer {
      */
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public double[] parallelAffect(double... inputs) {
+    public double[] parallelAffect(double[] inputs) {
         assert inputs.length == this.size() : "Different length of arrays!";
 
         int layerSize = this.size();
@@ -46,7 +49,7 @@ public class DenseLayer extends AbstractLayer {
         AtomicInteger i = new AtomicInteger(0);
         ExecutorService pool = Executors.newFixedThreadPool(layerSize);
 
-        for (AbstractNeuron n : this) {
+        for (int iter = 0; iter < layerSize; iter++) {
             pool.submit(() -> {
                 int j = i.getAndIncrement();
                 out[j] = layer[j].affect(inputs);
@@ -54,7 +57,7 @@ public class DenseLayer extends AbstractLayer {
         }
         pool.shutdown();
         try {
-            while (!pool.awaitTermination(1, TimeUnit.SECONDS)) ;
+            while (!pool.awaitTermination(0, TimeUnit.SECONDS)) ;
         } catch (InterruptedException ie) {
             // Cancel if current thread also interrupted
             pool.shutdownNow();

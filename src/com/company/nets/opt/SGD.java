@@ -7,8 +7,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 public class SGD extends Optimizer {
-    private AbstractAnn ann;
-    private CostFunc cost;
     /*
     May be, get results for every layer?
     Index 0 has input.
@@ -26,12 +24,13 @@ public class SGD extends Optimizer {
 
     }
 
+    /**
+     * @param optimizerParams contain keys:
+     */
     @Override
-    public void fill(AbstractAnn ann, CostFunc cost, HashMap<String, Object> params) {
-        this.ann = ann;
-        this.cost = cost;
+    public void fill(AbstractAnn ann, HashMap<String, Object> optimizerParams) {
+        super.fill(ann, optimizerParams);
         this.resultsOfDirectPassage = new double[ann.size()][];
-
     }
 
     /*
@@ -39,7 +38,7 @@ public class SGD extends Optimizer {
      * Use AbstractLayer.parallelAffect().
      * */
     private void directPassage(double[] input) {
-        Iterator<AbstractLayer> iter = ann.iterator();
+        Iterator<AbstractLayer> iter = getAnn().iterator();
         resultsOfDirectPassage[0] = input;
         iter.next();    // skip input layer
         int i = 1;
@@ -50,17 +49,4 @@ public class SGD extends Optimizer {
             i++;
         }
     }
-
-    /*
-     * @param params contains the keys:
-     *               cost - object of cost func,
-     *               ann - object of artificial neural network,
-     *               activationParams - params of activation function,
-     *
-     *
-    static void SGD(HashMap<String, Object> params) {
-        AbstractAnn ann = (AbstractAnn) params.remove("ann");
-        double[][][] wCurrent = ann.getWeights();
-    }
-    }*/
 }

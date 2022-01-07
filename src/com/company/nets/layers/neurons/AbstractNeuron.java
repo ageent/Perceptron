@@ -1,7 +1,6 @@
 package com.company.nets.layers.neurons;
 
 import java.util.Arrays;
-import java.util.Objects;
 import java.util.Random;
 import java.util.logging.Logger;
 import java.util.random.RandomGenerator;
@@ -20,7 +19,7 @@ public abstract class AbstractNeuron {
         this.activation = activation;
     }
 
-    public abstract double affect(double... inputs);
+    public abstract double affect(double[] inputs);
 
     /**
      * If shift is false then weight[0] is 0.
@@ -44,13 +43,13 @@ public abstract class AbstractNeuron {
      * weights[0] is shift.
      */
     public double[] getWeights() {
-        return weights;
+        return weights.clone();
     }
 
     /**
      * weights[0] is shift.
      */
-    protected void setWeights(double[] weights) {
+    public void setWeights(double[] weights) {
         this.weights = weights;
     }
 
@@ -70,28 +69,4 @@ public abstract class AbstractNeuron {
         this.activation = activation;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof AbstractNeuron that)) return false;
-        return Arrays.equals(weights, that.weights) &&
-                Objects.equals(combination, that.combination) &&
-                Objects.equals(activation, that.activation);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = Objects.hash(combination, activation);
-        result = 31 * result + Arrays.hashCode(weights);
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "AbstractNeuron{" +
-                "weights=" + Arrays.toString(weights) +
-                ", combination=" + combination +
-                ", activation=" + activation +
-                '}';
-    }
 }

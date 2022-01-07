@@ -1,4 +1,4 @@
-package com.company.nets.layers.neurons;
+/*package com.company.nets.layers.neurons;
 
 public class InputNeuron extends AbstractNeuron {
     private InputNeuron(int inputCount,
@@ -13,11 +13,8 @@ public class InputNeuron extends AbstractNeuron {
         this.setWeights(getInitialWeights(0, false));
     }
 
-    /**
-     * Return inputs[0].
-     */
     @Override
     public double affect(double... inputs) {
         return inputs[0];
     }
-}
+}*/

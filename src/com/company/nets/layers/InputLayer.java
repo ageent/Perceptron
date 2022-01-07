@@ -1,4 +1,4 @@
-package com.company.nets.layers;
+/*package com.company.nets.layers;
 
 import com.company.nets.layers.neurons.InputNeuron;
 
@@ -19,4 +19,4 @@ public class InputLayer extends AbstractLayer {
     public double[] parallelAffect(double... inputs) {
         return inputs;
     }
-}
+}*/
