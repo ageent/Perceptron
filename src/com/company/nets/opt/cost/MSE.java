@@ -3,15 +3,10 @@ package com.company.nets.opt.cost;
 import java.util.Arrays;
 
 public class MSE extends AbstractCostFunc {
-    private double coef = 1;
+    private double coef = 0;
     private double[] coefs = new double[0];
 
     public MSE() {
-    }
-
-    public MSE(int numOfSeries) {
-        coefs = new double[numOfSeries];
-        Arrays.fill(coefs, 1);
     }
 
     /**
@@ -29,21 +24,22 @@ public class MSE extends AbstractCostFunc {
     }
 
     /**
-     * default coef = 1
+     * default coef = 1 / number of instance
      */
     @Override
     public double apply(double[] calculated, double[] correct) {
+        coef = 1 / (double) calculated.length;
         return apply(calculated, correct, coef);
     }
 
     /**
-     * default coef = 1
+     * default coef = 1 / number of instance
      */
     @Override
     public double apply(double[][] calculated, double[][] correct) {
         if (coefs.length == 0) {
-            coefs = new double[calculated[0].length];
-            Arrays.fill(coefs, 1);
+            coefs = new double[calculated[0].length];   // number of features
+            Arrays.fill(coefs, 1 / (double) calculated.length); // number of instance
         }
         if (calculated[0].length != coefs.length || correct[0].length != coefs.length)
             throw new IllegalArgumentException("Illegal size of method argument or field coefs");
@@ -58,6 +54,9 @@ public class MSE extends AbstractCostFunc {
     }
 
     public static double apply(double[] calculated, double[] correct, double coef) {
+        if (calculated.length != correct.length)
+            throw new IllegalArgumentException("Difficult sizes of method arguments!");
+
         double sum = 0;
         for (int i = 0; i < calculated.length; i++) {
             double diff = calculated[i] - correct[i];
